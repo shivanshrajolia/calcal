@@ -88,6 +88,8 @@ export const registerUser = async (req, res) => {
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
+        res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+
         res.status(201).json({ token, user });
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -112,6 +114,8 @@ export const loginUser = async (req, res) => {
         }
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
 
         res.status(200).json({ token, user });
     } catch (error) {

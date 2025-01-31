@@ -1,5 +1,5 @@
 .home {
-  max-width: 400px;
+  max-width: 800px;
   margin: auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -36,4 +36,49 @@
 .home .calories-info p {
   font-size: 18px;
   font-weight: bold;
+}
+
+.calorie-forms {
+  margin-top: 20px;
+}
+
+.calorie-forms form {
+  margin-bottom: 20px;
+}
+
+.calorie-forms h4 {
+  margin-bottom: 10px;
+}
+
+.calorie-forms input,
+.calorie-forms select,
+.calorie-forms button {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.calorie-forms button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.calorie-data {
+  margin-top: 20px;
+}
+
+.calorie-data h4 {
+  margin-bottom: 10px;
+}
+
+.calorie-data ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.calorie-data li {
+  margin-bottom: 10px;
 }

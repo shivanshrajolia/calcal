@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import './Profile.css';
 import { AuthContext } from '../../context/AuthContext';
 
-const BACKEND_URI = 'http://localhost:5000';
+const BACKEND_URI = 'https://fkt1tpkn-5000.inc1.devtunnels.ms';
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -16,7 +17,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = Cookies.get('token');
         if (!token) {
           navigate('/login');
           return;
@@ -38,7 +39,7 @@ const Profile = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
+      const token = Cookies.get('token');
       let imageUrl = user.image;
 
       if (image) {

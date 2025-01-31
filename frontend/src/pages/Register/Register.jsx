@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import { AuthContext } from '../../context/AuthContext';
 
-const BACKEND_URI = 'http://localhost:5000';
+const BACKEND_URI = 'https://fkt1tpkn-5000.inc1.devtunnels.ms';
 
 const Register = () => {
   const [name, setName] = useState('');

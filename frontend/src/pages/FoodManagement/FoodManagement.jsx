@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { AuthContext } from '../../context/AuthContext';
 import './FoodManagement.css';
 
-const BACKEND_URI = 'http://localhost:5000';
+const BACKEND_URI = 'https://fkt1tpkn-5000.inc1.devtunnels.ms';
 
 const FoodManagement = () => {
   const [foods, setFoods] = useState([]);
@@ -43,7 +44,7 @@ const FoodManagement = () => {
   const handleAddFood = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
+      const token = Cookies.get('token');
       if (!token) {
         setError('User is not authenticated');
         return;
@@ -96,7 +97,7 @@ const FoodManagement = () => {
 
   const handleDeleteFood = async (id) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = Cookies.get('token');
       if (!token) {
         setError('User is not authenticated');
         return;
