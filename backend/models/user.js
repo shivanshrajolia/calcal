@@ -41,6 +41,18 @@ const userSchema = new mongoose.Schema({
     },
     image: {
         type: String
+    },
+    calorieTarget: {
+        type: Number,
+        required: false
+    },
+    waterTarget: {
+        type: Number,
+        default: 10
+    },
+    sleepTarget: {
+        type: Number,
+        default: 7
     }
 }, {
     timestamps: true

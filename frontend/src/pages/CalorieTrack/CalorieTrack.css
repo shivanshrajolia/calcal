@@ -1,0 +1,74 @@
+.calorie-track {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.calorie-track h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.calorie-track .error {
+  color: red;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.calorie-track .calorie-data {
+  margin-top: 20px;
+}
+
+.calorie-track .calorie-data h3 {
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+.calorie-track .calorie-data h4 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.calorie-track .calorie-data ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.calorie-track .calorie-data li {
+  margin-bottom: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calorie-track .calorie-data li button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+}
+
+.calorie-track .calorie-data li button:hover {
+  background-color: #c82333;
+}
+
+.calorie-track .meal-section {
+  margin-bottom: 20px;
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

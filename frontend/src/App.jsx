@@ -6,21 +6,19 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Profile from './pages/Profile/Profile';
 import FoodManagement from './pages/FoodManagement/FoodManagement';
+import CalorieTrack from './pages/CalorieTrack/CalorieTrack';
 
 const App = () => {
   return (
     <div className='app'>
-      <Navbar />
-
-
-
-
+      {/* <Navbar /> */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/foodm' element={<FoodManagement/>} />
+        <Route path='/foodm' element={<FoodManagement />} />
+        <Route path='/calorietrack' element={<CalorieTrack />} />
       </Routes>
     </div>
   );

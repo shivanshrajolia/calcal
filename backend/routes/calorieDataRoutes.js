@@ -5,7 +5,9 @@ import {
     addLunch,
     addEveningSnacks,
     addDinner,
-    removeCalorieData
+    removeCalorieData,
+    getCalorieDataByUserAndDate,
+    getCalorieSumByUserAndDate,
 } from '../controllers/calorieDataController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
@@ -18,5 +20,8 @@ router.post('/addeveningsnacks', protect, addEveningSnacks);
 router.post('/adddinner', protect, addDinner);
 
 router.delete('/remove/:id', protect, removeCalorieData);
+
+router.get('/', protect, getCalorieDataByUserAndDate);
+router.get('/sum', protect, getCalorieSumByUserAndDate);
 
 export default router;

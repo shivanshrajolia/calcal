@@ -157,10 +157,42 @@ export const updateUserProfile = async (req, res) => {
         user.activityLevel = activityLevel || user.activityLevel;
         user.image = image || user.image;
 
+        // Calculate and set calorie target
+        const calorieTarget = calculateMaintenanceCalories(user);
+        if (calorieTarget) {
+            user.calorieTarget = calorieTarget;
+        }
+
         await user.save();
 
         res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+};
+
+// Calculate maintenance calories
+const calculateMaintenanceCalories = (user) => {
+    if (user.height && user.weight && user.age && user.sex && user.activityLevel) {
+        let bmr;
+        if (user.sex === 'male') {
+            bmr = 88.362 + (13.397 * user.weight) + (4.799 * user.height) - (5.677 * user.age);
+        } else if (user.sex === 'female') {
+            bmr = 447.593 + (9.247 * user.weight) + (3.098 * user.height) - (4.330 * user.age);
+        } else {
+            bmr = (88.362 + (13.397 * user.weight) + (4.799 * user.height) - (5.677 * user.age) +
+                   447.593 + (9.247 * user.weight) + (3.098 * user.height) - (4.330 * user.age)) / 2;
+        }
+
+        const activityMultiplier = {
+            sedentary: 1.2,
+            light: 1.375,
+            moderate: 1.55,
+            active: 1.725,
+            'very active': 1.9,
+        };
+
+        return bmr * activityMultiplier[user.activityLevel];
+    }
+    return null;
 };

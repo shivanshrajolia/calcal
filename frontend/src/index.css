@@ -2,16 +2,18 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 body{
   min-height: 100vh;
-
+  background: url('./assets/Loginpage.png');
 }
 a{
   text-decoration: none;
   color: inherit;
 }
 .app{
-  max-width: 750px;
+  max-width: 650px;
   margin: auto;
+  
 }

@@ -1,37 +1,85 @@
 .login {
-  max-width: 400px;
+  max-width: 650px;
+}
+
+.topbar{
+  width: 100vw;
+  max-width: inherit;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  
+}
+.topbar h1{
+  font-weight: bold;
+  font-size: 4em;
+}
+
+.login .container{
+  display: flex;
+  justify-content: center;
+  height: 60vh;
+}
+.login-container {
+  width: 90vw;
+  max-width: inherit;
   margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 50px 50px;
+  /* border: 1px solid #ccc; */
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
 }
-
-.login h2 {
+.login-container h2 {
   text-align: center;
+  font-weight: bold;
+  font-size: 3em;
+  color: #083417;
 }
 
-.login .error {
+.login-container .error {
   color: red;
   text-align: center;
 }
 
-.login form {
+.login-container form {
   display: flex;
   flex-direction: column;
+  align-items: space-between;
 }
-
-.login input {
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 16px;
+.login-container form h3{
+  font-size: 1.2em;
+  color: #083417;
 }
-
-.login button {
+.login-container input {
+  margin-bottom: 20px;
   padding: 10px;
-  font-size: 16px;
-  background-color: #007bff;
+  font-size: 20px;
   color: white;
+  background: transparent;
   border: none;
-  border-radius: 5px;
+  border-bottom: 1px solid white;
+}
+
+.login-container input::placeholder {
+  color: white;
+}
+.login-container input:focus {
+  outline: none;
+}
+
+.login-container button {
+  padding: 10px;
+  font-size: 1.2em;
+  width: 80%;
+  margin: 20px auto 0px;
+  background-color: white;
+  color: rgb(100, 175, 129);
+  font-weight: bold;
+  border-radius: 40px;
   cursor: pointer;
+  border: none;
+  box-shadow: 5px 5px 10px grey;
 }
