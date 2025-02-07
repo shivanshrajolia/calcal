@@ -3,7 +3,7 @@ import Food from '../models/food.js';
 // Create a new food item
 export const createFood = async (req, res) => {
     try {
-        const { name, calories, protein, carbs, fats, weight, image } = req.body;
+        const { name, calories, protein, carbs, fats, fiber, weight, image } = req.body;
 
         const food = new Food({
             name,
@@ -11,6 +11,7 @@ export const createFood = async (req, res) => {
             protein,
             carbs,
             fats,
+            fiber,
             weight,
             image
         });

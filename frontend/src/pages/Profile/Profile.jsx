@@ -49,7 +49,7 @@ const Profile = () => {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
-          },
+          }, 
         });
         imageUrl = uploadResponse.data.url;
       }
@@ -60,6 +60,7 @@ const Profile = () => {
         },
       });
       setUser(response.data);
+      navigate('/');
       setError('');
     } catch (err) {
       setError('Failed to update profile');

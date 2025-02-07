@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Register.css';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -53,7 +53,9 @@ const Register = () => {
         />
         <button type="submit">Register</button>
       </form>
+      <div className="link"> Already have an account? <Link to="/login"> Login here.</Link></div>
     </div>
+    
   );
 };
 

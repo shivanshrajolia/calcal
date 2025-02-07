@@ -1,0 +1,30 @@
+.time-bar-container {
+    width: 90vw;
+    max-width: 500px;
+    display: flex;
+  }
+  
+  .nav-button {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: auto;
+  }
+  
+  .time-bar {
+    display: flex;
+    overflow-x: hidden;
+  }
+  
+  .day-item {
+    flex: 0 0 auto;
+    width: 40px;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .day-item.selected {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+  }
+  

@@ -6,7 +6,7 @@
 }
 body{
   min-height: 100vh;
-  background: url('./assets/Loginpage.png');
+  background-color: darkgreen;
 }
 a{
   text-decoration: none;

@@ -6,6 +6,7 @@ import userRoutes from './routes/userRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import foodRoutes from './routes/foodRoutes.js';
 import calorieDataRoutes from './routes/calorieDataRoutes.js'; // Import the new routes
+import weightDataRoutes from './routes/weightDataRoutes.js';
 import path from 'path';
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/foods', foodRoutes);
 app.use('/api/caloriedata', calorieDataRoutes); // Use the new routes
+app.use('/api/weightdata', weightDataRoutes);
 
 // Serve static files from the uploads directory
 const __dirname = path.resolve();

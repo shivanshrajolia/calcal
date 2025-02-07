@@ -15,6 +15,7 @@ const FoodManagement = () => {
     protein: '',
     carbs: '',
     fats: '',
+    fiber:'',
     weight: ''
   });
   const [error, setError] = useState('');
@@ -70,6 +71,7 @@ const FoodManagement = () => {
         protein: newFood.protein,
         carbs: newFood.carbs,
         fats: newFood.fats,
+        fiber: newFood.fiber,
         weight: newFood.weight,
         image: imageUrl
       };
@@ -88,6 +90,7 @@ const FoodManagement = () => {
         protein: '',
         carbs: '',
         fats: '',
+        fiber:'',
         weight: ''
       });
     } catch (err) {
@@ -128,6 +131,7 @@ const FoodManagement = () => {
               <p>Protein: {food.protein}g</p>
               <p>Carbs: {food.carbs}g</p>
               <p>Fats: {food.fats}g</p>
+              <p>Fiber: {food.fiber}g</p>
               <p>Weight: {food.weight}g</p>
               {isAuthenticated && (
                 <button onClick={() => handleDeleteFood(food._id)} className="delete-button">Delete</button>
@@ -145,6 +149,7 @@ const FoodManagement = () => {
           <input type="number" name="protein" placeholder="Protein" value={newFood.protein} onChange={handleChange} />
           <input type="number" name="carbs" placeholder="Carbs" value={newFood.carbs} onChange={handleChange} />
           <input type="number" name="fats" placeholder="Fats" value={newFood.fats} onChange={handleChange} />
+          <input type="number" name="fiber" placeholder="Fiber" value={newFood.fiber} onChange={handleChange} />
           <input type="number" name="weight" placeholder="Weight" value={newFood.weight} onChange={handleChange} />
           <button type="submit">Add Food</button>
         </form>

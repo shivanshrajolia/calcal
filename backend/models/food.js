@@ -26,6 +26,10 @@ const foodSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    fiber:{
+        type: Number,
+        required: true
+    },
     weight: {
         type: Number,
         required: true

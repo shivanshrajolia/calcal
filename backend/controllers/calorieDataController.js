@@ -3,7 +3,7 @@ import Caloriedata from '../models/caloriedata.js';
 // Add breakfast data
 export const addBreakfast = async (req, res) => {
     try {
-        const { date, user_id, food_id, quantity, unit, calories } = req.body;
+        const { date, user_id, food_id, quantity, unit, calories, protein, carbs, fats, fiber } = req.body;
 
         const calorieData = new Caloriedata({
             date,
@@ -12,7 +12,11 @@ export const addBreakfast = async (req, res) => {
             food_id,
             quantity,
             unit,
-            calories
+            calories,
+            protein,
+            carbs,
+            fats,
+            fiber
         });
 
         await calorieData.save();
@@ -25,7 +29,7 @@ export const addBreakfast = async (req, res) => {
 // Add morning snacks data
 export const addMorningSnacks = async (req, res) => {
     try {
-        const { date, user_id, food_id, quantity, unit, calories } = req.body;
+        const { date, user_id, food_id, quantity, unit, calories, protein, carbs, fats, fiber } = req.body;
 
         const calorieData = new Caloriedata({
             date,
@@ -34,7 +38,11 @@ export const addMorningSnacks = async (req, res) => {
             food_id,
             quantity,
             unit,
-            calories
+            calories,
+            protein,
+            carbs,
+            fats,
+            fiber
         });
 
         await calorieData.save();
@@ -47,7 +55,7 @@ export const addMorningSnacks = async (req, res) => {
 // Add lunch data
 export const addLunch = async (req, res) => {
     try {
-        const { date, user_id, food_id, quantity, unit, calories } = req.body;
+        const { date, user_id, food_id, quantity, unit, calories, protein, carbs, fats, fiber } = req.body;
 
         const calorieData = new Caloriedata({
             date,
@@ -56,7 +64,11 @@ export const addLunch = async (req, res) => {
             food_id,
             quantity,
             unit,
-            calories
+            calories,
+            protein,
+            carbs,
+            fats,
+            fiber
         });
 
         await calorieData.save();
@@ -69,7 +81,7 @@ export const addLunch = async (req, res) => {
 // Add evening snacks data
 export const addEveningSnacks = async (req, res) => {
     try {
-        const { date, user_id, food_id, quantity, unit, calories } = req.body;
+        const { date, user_id, food_id, quantity, unit, calories, protein, carbs, fats, fiber } = req.body;
 
         const calorieData = new Caloriedata({
             date,
@@ -78,7 +90,11 @@ export const addEveningSnacks = async (req, res) => {
             food_id,
             quantity,
             unit,
-            calories
+            calories,
+            protein,
+            carbs,
+            fats,
+            fiber
         });
 
         await calorieData.save();
@@ -91,7 +107,7 @@ export const addEveningSnacks = async (req, res) => {
 // Add dinner data
 export const addDinner = async (req, res) => {
     try {
-        const { date, user_id, food_id, quantity, unit, calories } = req.body;
+        const { date, user_id, food_id, quantity, unit, calories, protein, carbs, fats, fiber } = req.body;
 
         const calorieData = new Caloriedata({
             date,
@@ -100,7 +116,11 @@ export const addDinner = async (req, res) => {
             food_id,
             quantity,
             unit,
-            calories
+            calories,
+            protein,
+            carbs,
+            fats,
+            fiber
         });
 
         await calorieData.save();
@@ -150,7 +170,7 @@ export const getCalorieDataByUserAndDate = async (req, res) => {
         };
 
         calorieData.forEach(data => {
-            groupedData[data.meal_type.toLowerCase().replace(' ', '')].push(data);
+            groupedData[data.meal_type.toLowerCase().replace(' ', '') || 'other'].push(data);
         });
 
         res.status(200).json(groupedData);
@@ -180,13 +200,21 @@ export const getCalorieSumByUserAndDate = async (req, res) => {
             {
                 $group: {
                     _id: null,
-                    totalCalories: { $sum: "$calories" }
+                    totalCalories: { $sum: "$calories" },
+                    totalProtein: {$sum: "$protein"},
+                    totalCarbs: {$sum: "$carbs"},
+                    totalFats: {$sum: "$fats"},
+                    totalFiber: {$sum: "$fiber"}
                 }
             }
         ]);
 
         const totalCalories = calorieData.length > 0 ? calorieData[0].totalCalories : 0;
-        res.status(200).json({ totalCalories });
+        const totalProtein = calorieData.length > 0 ? calorieData[0].totalProtein : 0;
+        const totalCarbs = calorieData.length > 0 ? calorieData[0].totalCarbs : 0;
+        const totalFats = calorieData.length > 0 ? calorieData[0].totalFats : 0;
+        const totalFiber = calorieData.length > 0 ? calorieData[0].totalFiber : 0;
+        res.status(200).json({ totalCalories, totalProtein, totalCarbs, totalFats, totalFiber });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

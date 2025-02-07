@@ -44,7 +44,38 @@ const userSchema = new mongoose.Schema({
     },
     calorieTarget: {
         type: Number,
+        default: 0,
         required: false
+    },
+    proteinTarget: {
+        type: Number,
+        required: false
+    },
+    carbsTarget: {
+        type: Number,
+        required: false
+    },
+    fatsTarget: {
+        type: Number,
+        required: false
+    },
+    fiberTarget: {
+        type: Number,
+        required: false
+    },
+    weightTarget:{
+        type: Number,
+        required: false
+    },
+    loseWtTarget:{
+        type: Number,
+        required: false,
+        enum:['0.25kg/week', '0.5kg/week', '0.75kg/week', '1kg/week']
+    },
+    gainWtTarget:{
+        type: Number,
+        required: false,
+        enum:['0.25kg/week', '0.5kg/week', '0.75kg/week', '1kg/week']
     },
     waterTarget: {
         type: Number,

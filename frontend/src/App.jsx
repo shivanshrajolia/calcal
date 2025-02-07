@@ -7,11 +7,14 @@ import Register from './pages/Register/Register';
 import Profile from './pages/Profile/Profile';
 import FoodManagement from './pages/FoodManagement/FoodManagement';
 import CalorieTrack from './pages/CalorieTrack/CalorieTrack';
+import Weight from './components/Weight/Weight';
+import Calendar from './components/Calendar/Calendar';
 
 const App = () => {
   return (
     <div className='app'>
       {/* <Navbar /> */}
+      {/* <Calendar selectedDate={selectedDate} onChange={setSelectedDate}/> */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
@@ -19,6 +22,7 @@ const App = () => {
         <Route path='/profile' element={<Profile />} />
         <Route path='/foodm' element={<FoodManagement />} />
         <Route path='/calorietrack' element={<CalorieTrack />} />
+        <Route path='/weight' element={<Weight/>}/>
       </Routes>
     </div>
   );

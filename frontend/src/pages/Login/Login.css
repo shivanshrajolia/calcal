@@ -83,3 +83,15 @@
   border: none;
   box-shadow: 5px 5px 10px grey;
 }
+
+.login-container .link{
+  width: 90vw;
+  max-width: 500px;
+  margin: auto;
+  margin-top: 30px;
+  text-align: center;
+  color: white;
+}
+.login-container .link a{
+  color: blue;
+}

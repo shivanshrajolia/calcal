@@ -113,7 +113,7 @@ export const loginUser = async (req, res) => {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '2d' });
 
         res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
 
@@ -159,9 +159,15 @@ export const updateUserProfile = async (req, res) => {
 
         // Calculate and set calorie target
         const calorieTarget = calculateMaintenanceCalories(user);
-        if (calorieTarget) {
-            user.calorieTarget = calorieTarget;
+        if (user.calorieTarget == 0) {
+            user.calorieTarget = Math.round(calorieTarget);
+            user.proteinTarget = Math.round((calorieTarget * 0.30) / 4);
+            user.carbsTarget = Math.round((calorieTarget * 0.45) / 4);
+            user.fatsTarget = Math.round((calorieTarget * 0.25) / 9);
+            user.fiberTarget = Math.round((calorieTarget / 1000) * 14);
         }
+
+
 
         await user.save();
 

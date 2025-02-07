@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import './CalorieTrack.css';
+import Timebar from '../../components/Timebar/Timebar';
 
 const BACKEND_URI = 'https://fkt1tpkn-5000.inc1.devtunnels.ms';
 
@@ -18,11 +19,15 @@ const CalorieTrack = () => {
     dinner: []
   });
   const [newCalorieData, setNewCalorieData] = useState({
-    date: new Date().toISOString().split('T')[0], // Set default date to today
+    date: new Date().toISOString().split('T')[0],
     food_id: '',
     quantity: '',
     unit: 'g',
-    calories: ''
+    calories: '',
+    protein:'',
+    carbs:'',
+    fats:'',
+    fiber:''
   });
   const [foodDetails, setFoodDetails] = useState(null);
   const [foods, setFoods] = useState([]); // State to store all fetched foods
@@ -74,7 +79,7 @@ const CalorieTrack = () => {
 
     fetchProfile();
     fetchFoods();
-  }, [navigate, selectedDate]);
+  }, [selectedDate]);
 
   const fetchCalorieDataForDate = async (userId, date) => {
     try {
@@ -117,22 +122,47 @@ const CalorieTrack = () => {
 
     if (name === 'quantity' && foodDetails) {
       let totalCalories;
+      let totalProtein;
+      let totalCarbs;
+      let totalFats;
+      let totalFiber;
       if (newCalorieData.unit === 'g') {
         totalCalories = (foodDetails.calories / foodDetails.weight) * value;
+        totalProtein = (foodDetails.protein / foodDetails.weight) * value;
+        totalCarbs = (foodDetails.carbs / foodDetails.weight) * value;
+        totalFats = (foodDetails.fats / foodDetails.weight) * value;
+        totalFiber = (foodDetails.fiber / foodDetails.weight) * value;
       } else if (newCalorieData.unit === 'serving') {
         totalCalories = foodDetails.calories * value;
+        totalProtein = foodDetails.protein * value;
+        totalCarbs = foodDetails.carbs * value;
+        totalFats = foodDetails.fats * value;
+        totalFiber = foodDetails.fiber * value;
       }
-      setNewCalorieData((prevData) => ({ ...prevData, calories: totalCalories }));
+      setNewCalorieData((prevData) => ({ ...prevData, calories: totalCalories, protein: totalProtein, carbs: totalCarbs, fats: totalFats, fiber: totalFiber }));
     }
 
     if (name === 'unit' && foodDetails) {
       let totalCalories;
+      let totalProtein;
+      let totalCarbs;
+      let totalFats;
+      let totalFiber;
       if (value === 'g') {
         totalCalories = (foodDetails.calories / foodDetails.weight) * newCalorieData.quantity;
+        totalProtein = (foodDetails.protein / foodDetails.weight) * newCalorieData.quantity;
+        totalCarbs = (foodDetails.carbs / foodDetails.weight) * newCalorieData.quantity;
+        totalFats = (foodDetails.fats / foodDetails.weight) * newCalorieData.quantity;
+        totalFiber = (foodDetails.fiber / foodDetails.weight) * newCalorieData.quantity;
+
       } else if (value === 'serving') {
         totalCalories = foodDetails.calories * newCalorieData.quantity;
+        totalProtein = foodDetails.protein * newCalorieData.quantity;
+        totalCarbs = foodDetails.carbs * newCalorieData.quantity;
+        totalFats = foodDetails.fats * newCalorieData.quantity;
+        totalFiber = foodDetails.fiber * newCalorieData.quantity;
       }
-      setNewCalorieData((prevData) => ({ ...prevData, calories: totalCalories }));
+      setNewCalorieData((prevData) => ({ ...prevData, calories: totalCalories, protein: totalProtein, carbs: totalCarbs, fats: totalFats, fiber: totalFiber }));
     }
   };
 
@@ -147,6 +177,7 @@ const CalorieTrack = () => {
 
       const calorieDataPayload = {
         ...newCalorieData,
+        date: selectedDate, // Ensure the date is set to the selected date
         user_id: user._id, // Ensure user_id is included in the payload
         meal_type: mealType.charAt(0).toUpperCase() + mealType.slice(1).replace(/([A-Z])/g, ' $1').trim() // Format meal type
       };
@@ -167,7 +198,11 @@ const CalorieTrack = () => {
         food_id: '',
         quantity: '',
         unit: 'g',
-        calories: ''
+        calories: '',
+        protein:'',
+        carbs:'',
+        fats:'',
+        fiber:''
       });
       setFoodDetails(null);
     } catch (err) {
@@ -240,22 +275,44 @@ const CalorieTrack = () => {
     <div className="calorie-track">
       {isAuthenticated ? (
         <>
-          <h2>Calorie Tracking</h2>
+          {/* <h2>Calorie Tracking</h2> */}
           {error && <p className="error">{error}</p>}
+
+          <div className="topbar">
+            <h2>Intake</h2>
+
+            <div className="date-picker">
+              <input
+                // type="date"
+                // value={selectedDate}
+                // onChange={handleDateChange}
+                // ref={dateInputRef}
+              />
+              <img
+                // src={Calenderimg}
+                // alt="Calendar"
+                // className="calendar-icon"
+                // onClick={handleCalendarClick}
+              />
+            </div>
+          </div>
+
           <div className="calorie-data">
-            <h3>View and Add Calorie Data</h3>
-            <input
+            {/* <h3>View and Add Calorie Data</h3> */}
+            {/* <input
               type="date"
               value={selectedDate}
               onChange={handleDateChange}
-            />
+            /> */}
+            <Timebar onChange={setSelectedDate}/>
             {['breakfast', 'morningSnacks', 'lunch', 'eveningSnacks', 'dinner'].map((mealType) => (
               <div key={mealType} className="meal-section">
                 <h4>{mealType.charAt(0).toUpperCase() + mealType.slice(1)}</h4>
                 <ul>
                   {calorieData[mealType].map((data) => (
                     <li key={data._id}>
-                      {new Date(data.date).toLocaleDateString()} - {foodMap[data.food_id]} - {data.quantity} {data.unit} - {data.calories} kcal
+                      {new Date(data.date).toLocaleDateString()} - {foodMap[data.food_id]} - {data.quantity} {data.unit} - {data.calories} kcal <br />
+                         {data.protein} g - {data.carbs} g - {data.fats} g - {data.fiber} g
                       <button onClick={() => handleDeleteCalorieData(data._id, mealType)}>Delete</button>
                     </li>
                   ))}
